@@ -9,23 +9,27 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       responseJson: [],
-      city: 'Copenhagen'
+      city: 'Copenhagen',
+      location: ''
     };
     this.onCitySelected = this.onCitySelected.bind(this);
   }
   
   async getApiData(city) {
       try {
-        let apiUrl = `http://api.openweathermap.org/data/2.5/forecast?APPID=227a9c82ccb5189be0fd776885c5d84c&q=${city}&units=metric`
-        console.log(apiUrl);
+        let apiUrl = `http://api.openweathermap.org/data/2.5/forecast?APPID=227a9c82ccb5189be0fd776885c5d84c&q=${city}&units=metric`        
         let response = await fetch(apiUrl);
         let responseJson = await response.json();  
-        console.log(responseJson);      
+
         responseJson.list.forEach((x) => {
           x.dt = new Date(x.dt * 1000);
         });        
-        console.log(responseJson);          
-        this.setState({responseJson});
+        console.log(responseJson);
+        
+        this.setState({
+          responseJson,
+          location: `${responseJson.city.name}, ${responseJson.city.country}`          
+        });
         
       } catch(error) {
       console.error(error);
@@ -48,7 +52,8 @@ export default class App extends React.Component {
       return null;
     }
     return (
-      <View style={styles.container}>        
+      <View style={styles.container}> 
+        <Text>{this.state.location}</Text>       
         <CitySelection onCitySelected={this.onCitySelected} />
         <ForecastChart data={this.state.responseJson.list}  />
       </View>
