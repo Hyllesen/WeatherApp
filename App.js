@@ -53,8 +53,8 @@ export default class App extends React.Component {
     }
     return (
       <View style={styles.container}> 
-        <Text>{this.state.location}</Text>       
         <CitySelection onCitySelected={this.onCitySelected} />
+        <Text>{this.state.location}</Text>       
         <ForecastChart data={this.state.responseJson.list}  />
       </View>
     );

@@ -18,12 +18,11 @@ export default class ForecastChart extends Component {
             theme={VictoryTheme.grayscale}
         >
     <VictoryAxis
-        scale="time"
-        label="Date"
+        scale="time"        
     />
     <VictoryAxis
       dependentAxis
-      label="Temp"
+      tickFormat={(x) => (`${x} °C`)}
     />
     <VictoryStack
       style={{
@@ -32,7 +31,7 @@ export default class ForecastChart extends Component {
     >
       <VictoryArea
         style={{
-          data: { fill: "#bbc1cc", opacity: 0.7 },
+          data: { fill: "#ffdd89", opacity: 0.7, stroke: "#efc356" },
         }}
         data={this.props.data}
         x="dt"
