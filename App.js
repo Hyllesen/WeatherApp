@@ -21,7 +21,7 @@ export default class App extends React.Component {
         let responseJson = await response.json();  
 
         responseJson.list.forEach((x) => {
-          x.dt = new Date(x.dt*1000);
+          x.dt = new Date(x.dt*1000); //Multiplying by 1000 to convert to miliseconds
         });        
         console.log(responseJson);
         
