@@ -8,13 +8,6 @@ export default class CitySelection extends Component {
         this.state = {
             city: ''
         };
-        this.onCitySelected = this.onCitySelected.bind(this);
-    }
-
-    onCitySelected() {
-        console.log('Cityselection onpress');
-        console.log(this.props);
-        this.props.onCitySelected(this.state.city);
     }
 
     render() {
@@ -27,7 +20,7 @@ export default class CitySelection extends Component {
             onChangeText={(city) => this.setState({city})}
             style={{height: 40, width: 150}}
             />        
-            <Button onPress={this.onCitySelected} title="Submit" />              
+            <Button onPress={() => this.props.onCitySelected(this.state.city)} title="Submit" />              
         </View>    
         );
     }

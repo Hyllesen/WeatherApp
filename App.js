@@ -9,10 +9,9 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       responseJson: [],
-      city: 'Copenhagen',
       location: ''
     };
-    this.onCitySelected = this.onCitySelected.bind(this);
+    this.getApiData = this.getApiData.bind(this);
   }
   
   async getApiData(city) {
@@ -22,7 +21,7 @@ export default class App extends React.Component {
         let responseJson = await response.json();  
 
         responseJson.list.forEach((x) => {
-          x.dt = new Date(x.dt * 1000);
+          x.dt = new Date(x.dt*1000);
         });        
         console.log(responseJson);
         
@@ -36,15 +35,8 @@ export default class App extends React.Component {
     }
   }
 
-  onCitySelected(city) {
-    console.log("City selected " + city);
-    this.setState({city});
-    console.log(this.state);
-    this.getApiData(city);
-  }
-
   componentWillMount() {
-    this.getApiData(this.state.city);
+    this.getApiData('Copenhagen');
   }
 
   render() {
@@ -53,7 +45,7 @@ export default class App extends React.Component {
     }
     return (
       <View style={styles.container}> 
-        <CitySelection onCitySelected={this.onCitySelected} />
+        <CitySelection onCitySelected={this.getApiData} />
         <Text>{this.state.location}</Text>       
         <ForecastChart data={this.state.responseJson.list}  />
       </View>

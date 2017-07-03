@@ -6,19 +6,16 @@ import {View } from 'react-native';
 
 export default class ForecastChart extends Component {
 
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
     return (
         <VictoryChart
-            animate={{duration: 1500}}
+            animate={{duration: 500}}
             theme={VictoryTheme.grayscale}
         >
     <VictoryAxis
-        scale="time"        
+        scale="time"  
+        tickCount={3}
+
     />
     <VictoryAxis
       dependentAxis
