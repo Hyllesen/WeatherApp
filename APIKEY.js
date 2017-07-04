@@ -1,0 +1,1 @@
+export const APIKEY = 'REPLACE WITH YOUR OWN API KEY';

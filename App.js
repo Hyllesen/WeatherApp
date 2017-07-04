@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View,TextInput } from 'react-native';
 import ForecastChart from './components/ForecastChart';
 import CitySelection from './components/CitySelection';
+import { APIKEY } from './APIKEY';
 
 export default class App extends React.Component {
 
@@ -14,9 +15,10 @@ export default class App extends React.Component {
     this.getApiData = this.getApiData.bind(this);
   }
   
-  async getApiData(city) {
+  async getApiData(city) {    
       try {
-        let apiUrl = `http://api.openweathermap.org/data/2.5/forecast?APPID=227a9c82ccb5189be0fd776885c5d84c&q=${city}&units=metric`        
+        let apiUrl = `http://api.openweathermap.org/data/2.5/forecast?APPID=${APIKEY}&q=${city}&units=metric`;
+        console.log(apiUrl);        
         let response = await fetch(apiUrl);
         let responseJson = await response.json();  
 
